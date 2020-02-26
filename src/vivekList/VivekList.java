@@ -10,7 +10,7 @@ package vivekList;
 
 public class VivekList {
 
-	public Node head;
+	public Node singlyHead,doublyHead;
 	public Node currentNode;
 	public Node previousNode;
 	public Node forwardNode;
@@ -20,15 +20,15 @@ public class VivekList {
 	//Method to Add data in List
 	public void add(int value) {
 		newNode = new Node(value, null);
-		if(head == null)
+		if(singlyHead == null)
 		{
-			head = newNode;
+			singlyHead = newNode;
 			size++;
 			//System.out.println("Item Added...");
 		}
 		else
 		{
-			currentNode = head;
+			currentNode = singlyHead;
 			while(currentNode.getNext() != null)
 				currentNode = currentNode.getNext();
 			currentNode.setNext(newNode);
@@ -41,9 +41,9 @@ public class VivekList {
 	//Method to add Data at First.
 	public void addAtFirst(int value) {
 			newNode = new Node(value, null);
-			currentNode = head;
-			head = newNode;
-			head.setNext(currentNode);
+			currentNode = singlyHead;
+			singlyHead = newNode;
+			singlyHead.setNext(currentNode);
 			size++;
 			//System.out.println("Item Added At First....");
 		
@@ -59,7 +59,7 @@ public class VivekList {
 		{
 			int localIndex = 1;
 			newNode = new Node(value, null);
-			currentNode = head;
+			currentNode = singlyHead;
 			while(localIndex != index)
 			{
 				currentNode = currentNode.getNext();
@@ -75,7 +75,7 @@ public class VivekList {
 	
 	//Method to delete any data.
 	public void delete(int value) {
-		currentNode = head;
+		currentNode = singlyHead;
 		boolean flag = false;
 		while(currentNode.getData()!= value)
 		{
@@ -90,7 +90,7 @@ public class VivekList {
 	
 	//Method to print list
 	public void printList() {
-		currentNode = head;
+		currentNode = singlyHead;
 		System.out.println("Current List is: ");
 		while(currentNode.getNext() != null )
 		{
@@ -103,7 +103,7 @@ public class VivekList {
 	
 	//Method to reverse List Using Recursion
 	public void reverseListUsingRecursion() {
-		currentNode = head;
+		currentNode = singlyHead;
 		if(currentNode.getNext() == null)
 			return;
 		else
@@ -121,12 +121,53 @@ public class VivekList {
 		Node localNode = null;
 		if(node.getNext() == null)
 		{
-			head = node;
+			singlyHead = node;
 			return node;
 		}
 		
 		localNode = recursive(node.getNext());
 		localNode.setNext(node);
 		return node;
+	}
+	
+	//Method to Add data in DoublyList
+	public void addDoubly(int value) {
+		newNode = new Node(null,value, null);
+		if(doublyHead == null)
+		{
+			doublyHead = newNode;
+			size++;
+			//System.out.println("Item Added...");
+		}
+		else
+		{
+			currentNode = doublyHead;
+			while(currentNode.getNext() != null)
+			{
+				previousNode = currentNode;
+				currentNode = currentNode.getNext();
+			}
+			newNode.setPrevious(currentNode);
+			currentNode.setNext(newNode);
+			size++;
+			//System.out.println("Item Added...");
+		}
+		
+	}
+	
+	//Method to print Doublylist.
+	public void printDoublyList() {
+		currentNode = doublyHead;
+		System.out.println("Current List is: ");
+		while(currentNode.getNext() != null )
+		{
+			if(currentNode.getPrevious() == null)
+				System.out.println("Null<-"+currentNode.getData()+"->"+currentNode.getNext().getData());
+			else
+				System.out.println(currentNode.getPrevious().getData()+"<-"+currentNode.getData()+"->"+currentNode.getNext().getData());
+			currentNode = currentNode.getNext();
+		}
+		System.out.print(currentNode.getPrevious().getData()+"<-"+currentNode.getData()+"->Null");
+		System.out.println();
 	}
 }
