@@ -4,7 +4,7 @@
  * public void addAtFirst(int value)								 *
  * public void addAtIndex(int value,int index)						 *
  * public void delete(int value)									 *
- * public void reverseList()										 *
+ * public void reverseListUsingRecursion()							 *
  ********************************************************************/
 package vivekList;
 
@@ -101,7 +101,32 @@ public class VivekList {
 		System.out.println();
 	}
 	
-	public void reverseList() {
+	//Method to reverse List Using Recursion
+	public void reverseListUsingRecursion() {
+		currentNode = head;
+		if(currentNode.getNext() == null)
+			return;
+		else
+		{
+			 currentNode = recursive(currentNode);
+			 currentNode.setNext(null);
+			 System.out.println("List is Reversed. ");
+		}
 		
+	}
+	
+	//Recursive Function to add the reversed list as next to current node and return that current node.
+	public Node recursive(Node node)
+	{
+		Node localNode = null;
+		if(node.getNext() == null)
+		{
+			head = node;
+			return node;
+		}
+		
+		localNode = recursive(node.getNext());
+		localNode.setNext(node);
+		return node;
 	}
 }

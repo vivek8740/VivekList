@@ -12,6 +12,8 @@ public class App {
 		list.printList();
 		list.delete(3);
 		list.printList();
+		list.reverseListUsingRecursion();
+		list.printList();
 			
 	}
 }
